@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Saturday Report | Niki & Pascal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --apple-gray: #f5f5f7;
+            --apple-text: #1d1d1f;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: white;
+            color: var(--apple-text);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(0,0,0,0.05);
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+        .stat-bar {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .stat-fill {
+            height: 100%;
+            background: #007AFF;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+        .tab-icon {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #f0f0f2;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin: 2px;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="section visible bg-[#fbfbfd]">
+        <div class="max-w-md mx-auto text-center">
+            <span class="text-sm font-semibold tracking-widest uppercase opacity-50">Post-Date Analytics</span>
+            <h1 class="text-5xl font-semibold mt-4 mb-6 tracking-tight">Saturday.<br><span class="gradient-text">7+ Hours later.</span></h1>
+            <p class="text-lg opacity-60 leading-relaxed">A brief look back at why that first meeting between Niki and Pascal was statistically and emotionally significant 😊</p>
+            <div class="mt-12 opacity-30">
+                <p class="text-xs uppercase tracking-tighter">Scroll to analyze</p>
+                <div class="w-px h-12 bg-black mx-auto mt-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Time Paradox -->
+    <section class="section">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-3xl font-semibold mb-6">The Statisticl Proof why our first Date was unique 📉</h2>
+            <div class="glass-card">
+                <div class="mb-4">
+                    <div class="flex justify-between mb-2 text-sm font-medium">
+                        <span>Expected Duration</span>
+                        <span>2h</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill" data-width="20%"></div></div>
+                </div>
+                <div class="mb-6">
+                    <div class="flex justify-between mb-2 text-sm font-medium">
+                        <span>Actual Reality</span>
+                        <span class="text-blue-600">7h+</span>
+                    </div>
+                    <div class="stat-bar"><div class="stat-fill" data-width="75%"></div></div>
+                </div>
+                <p class="text-sm opacity-70 italic">"Assuming a right-skewed distribution, a 7-hour duration puts us at exactly 2 sigma above the mean. Scientifically speaking, that's the top 2.3% of all observations... but honestly, no amount of data could have predicted how much I’d enjoy losing track of time with you."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spice & Vetting -->
+    <section class="section">
+        <div class="max-w-md mx-auto grid grid-cols-1 gap-4">
+            <div class="glass-card">
+                <div class="text-3xl mb-2">🌮</div>
+                <h3 class="font-semibold text-xl mb-2">Spice Calibration</h3>
+                <p class="opacity-70">Matched your level without blinking. Tacos were hot, but neither the spice nor your questions made me sweat 😅</p>
+            </div>
+            <div class="glass-card bg-indigo-600 text-white border-none shadow-indigo-200 shadow-xl">
+                <div class="text-3xl mb-2">🔍</div>
+                <h3 class="font-semibold text-xl mb-2">System Vetting</h3>
+                <p class="text-indigo-100/80">Passed the Light & Deep Dive vetting test. Results: High Compatibility. No threats detected.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- EQ/IQ & Tabs -->
+    <section class="section">
+        <div class="max-w-md mx-auto">
+            <h2 class="text-3xl font-semibold mb-6">The Heart-Brain Interface ❤️🧠</h2>
+            <div class="glass-card overflow-hidden">
+                <p class="mb-4 text-lg">Meeting between EQ & IQ.</p>
+                <p class="opacity-70 mb-6">I love watching your mind jump between topics. It's like you keep a dozen tabs open and I want to browse every single one.</p>
+                <div class="flex flex-wrap opacity-50">
+                    <span class="tab-icon">Behavioral Psychology</span>
+                    <span class="tab-icon">Blink</span>
+                    <span class="tab-icon">Niki's Podcast Career</span>
+                    <span class="tab-icon">Comic Book Memories</span>
+                    <span class="tab-icon">Global Citizen</span>
+                    <span class="tab-icon">The Making of the Electrical Stairs</span>
+                    <span class="tab-icon">Legacy News Bias</span>
+                    <span class="tab-icon">Veritasium Rabbit Holes</span>
+                    <span class="tab-icon">+12 more</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Ski Slope Moment -->
+    <section class="section bg-[#007AFF] text-white">
+        <div class="max-w-md mx-auto text-center">
+            <div class="text-5xl mb-6">⛷️</div>
+            <h2 class="text-3xl font-semibold mb-4">The Indoor Ski Slope</h2>
+            <p class="text-lg opacity-90 mb-8 leading-relaxed">
+                Honestly, I didn't understand the complex architecture of this indoor ski slope, that you were trying so hard to describe :) I got momentarily lost in your beautiful, dark eyes and the cute way you explain things.
+            </p>
+            <div class="inline-block px-4 py-2 bg-white/20 rounded-full text-sm backdrop-blur-md">
+                Focus: 0% Skiing | 100% Niki
+            </div>
+        </div>
+    </section>
+
+    <!-- Zurich & Travel -->
+    <section class="section">
+        <div class="max-w-md mx-auto">
+            <div class="glass-card relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 text-8xl opacity-10">📍</div>
+                <h3 class="text-2xl font-semibold mb-4">The Zurich Anchor ⚓️</h3>
+                <p class="opacity-70 leading-relaxed">
+                    I'll give you every reason to build roots here and fall in love with this city. But if the travel itch comes back? I'm not too rigid to leave the home-base and follow the map.
+                </p>
+            </div>
+            <div class="mt-6 glass-card border-l-4 border-orange-400">
+                <h3 class="text-xl font-semibold mb-2">The "No Poker Face" Rule ♠️♥️</h3>
+                <p class="opacity-70 italic">
+                    I would never ask you to hide. I truly enjoy your expressiveness and the warmth you radiate while talking.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Vulnerability -->
+    <section class="section">
+        <div class="max-w-md mx-auto text-center">
+            <h2 class="text-3xl font-semibold mb-6 italic">YOUTH: "Why so certain, Pascal?"</h2>
+            <div class="p-8">
+                <p class="text-xl leading-relaxed opacity-80">
+                    PASCAL: "You made me feel at ease. You took away my nervousness in under 5 mins by just being you ☺️"
+                </p>
+                <div class="mt-8 text-blue-600 font-semibold tracking-wide uppercase text-xs">
+                    Only few people manage to do this.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Second Date Pitch -->
+    <section class="section bg-zinc-50">
+        <div class="max-w-md mx-auto">
+            <div class="text-center mb-10">
+                <span class="text-5xl">☕</span>
+                <h2 class="text-4xl font-semibold mt-4">The Proposal</h2>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-sm border border-black/5">
+                    <div class="bg-blue-100 p-2 rounded-lg">🍫</div>
+                    <div>
+                        <h4 class="font-semibold text-lg">The Best Chocolate</h4>
+                        <p class="text-sm opacity-60">Dark, bitter-sweet, non-dairy hot chocolate. The best Zurich has to offer.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-sm border border-black/5">
+                    <div class="bg-teal-100 p-2 rounded-lg">💬</div>
+                    <div>
+                        <h4 class="font-semibold text-lg">Language of Choice</h4>
+                        <p class="text-sm opacity-60">Since we both feel better in English, let's keep the next one in our favorite language.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4 p-4 bg-white rounded-2xl shadow-sm border border-black/5">
+                    <div class="bg-purple-100 p-2 rounded-lg">🤖</div>
+                    <div>
+                        <h4 class="font-semibold text-lg">AI Content Engine Demo</h4>
+                        <p class="text-sm opacity-60">A full walkthrough of the clinical marketing engine I am building for you.</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="cta-btn" class="w-full mt-12 bg-black text-white py-5 rounded-2xl font-semibold text-lg pulse shadow-xl active:scale-95 transition-transform">
+                Say Yes to Round 2?
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 text-center bg-white border-t border-zinc-100">
+        <p class="text-sm font-light text-zinc-400 tracking-tight">
+            over-engineered for <span class="text-zinc-600 font-medium">Niki</span>, by <span class="text-zinc-600 font-medium">Pascal</span>
+        </p>
+    </footer>
+
+    <div id="success-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-6 z-50">
+        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+            <div class="text-5xl mb-4">✨</div>
+            <h3 class="text-2xl font-bold mb-2 text-zinc-900">Excellent Choice.</h3>
+            <p class="opacity-70 mb-8 text-zinc-600">Pascal is already scouting the chocolate. Please confirm the reservation below!</p>
+            
+            <div class="space-y-3">
+                <a id="whatsapp-link" href="#" target="_blank" class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-4 rounded-xl font-semibold shadow-lg hover:brightness-110 transition-all">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.591-3.849-1.591-5.946 0-6.556 5.332-11.891 11.893-11.891 3.181 0 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.481 8.403 0 6.556-5.332 11.893-11.893 11.893-1.996 0-3.957-.502-5.691-1.448l-6.392 1.664zm6.3-4.064c1.551.921 3.289 1.408 5.053 1.408 5.454 0 9.893-4.438 9.893-9.891 0-2.641-1.027-5.124-2.892-6.992-1.866-1.867-4.347-2.894-6.991-2.894-5.454 0-9.893 4.438-9.893 9.891 0 2.093.653 4.135 1.889 5.848l-.993 3.626 3.71-.967zM17.472 14.382c-.301-.15-1.781-.879-2.056-.979-.275-.101-.475-.149-.675.15-.199.299-.775.979-.95 1.174-.175.195-.351.219-.652.069-.302-.15-1.274-.469-2.426-1.496-.897-.8-1.502-1.788-1.677-2.088-.175-.299-.018-.462.13-.61.135-.133.301-.35.452-.524.151-.174.201-.299.301-.498.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.224-.244-.583-.493-.503-.675-.512-.175-.01-.375-.01-.575-.01s-.525.076-.8.375c-.275.299-1.05 1.024-1.05 2.498 0 1.475 1.075 2.897 1.225 3.097.15.2 2.116 3.23 5.125 4.532.715.31 1.273.494 1.708.633.719.227 1.373.195 1.89.117.577-.088 1.781-.728 2.031-1.429.25-.7.25-1.3.175-1.428-.076-.125-.276-.199-.577-.349z"/></svg>
+                    Confirm via WhatsApp
+                </a>
+                <button onclick="document.getElementById('success-modal').style.display='none'" class="w-full py-3 text-sm text-zinc-400 hover:text-zinc-600 transition-colors">
+                    Maybe later
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Reveal sections on scroll
+        const observerOptions = {
+            threshold: 0.15
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate stat bars if present
+                    const bars = entry.target.querySelectorAll('.stat-fill');
+                    bars.forEach(bar => {
+                        bar.style.width = bar.getAttribute('data-width');
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // CTA Handler
+        document.getElementById('cta-btn').addEventListener('click', function() {
+            // Replace with your actual phone number (format: 417XXXXXXXXX)
+            const myNumber = "41790000000"; 
+            const text = encodeURIComponent("Hey Pascal, I've reviewed the analytics. Let's do that hot chocolate, AI demo, and keep it in English! 🇬🇧☕️🤖");
+            document.getElementById('whatsapp-link').href = `https://wa.me/${myNumber}?text=${text}`;
+            
+            document.getElementById('success-modal').style.display = 'flex';
+        });
+    </script>
+</body>
+</html>
