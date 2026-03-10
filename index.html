@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Saturday Report | Niki & Pascal</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -26,7 +28,8 @@
             padding: 2rem;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: opacity 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.6s ease;
+            will-change: opacity, transform;
         }
         .section.visible {
             opacity: 1;
@@ -40,6 +43,11 @@
             border: 1px solid rgba(0,0,0,0.05);
             padding: 2rem;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 40px rgba(0,0,0,0.08);
         }
         .stat-bar {
             height: 8px;
@@ -60,11 +68,65 @@
             border-radius: 8px;
             font-size: 0.8rem;
             margin: 2px;
+            transition: transform 0.25s ease, background-color 0.25s ease;
+        }
+        .tab-icon:hover {
+            transform: translateY(-2px);
+            background-color: #e6e8ef;
         }
         .gradient-text {
             background: linear-gradient(135deg, #007AFF 0%, #5856D6 100%);
+            background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 0, 0, 0.06);
+            z-index: 60;
+        }
+        #scroll-progress-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #007AFF 0%, #5856D6 100%);
+            transition: width 0.15s linear;
+        }
+        #cta-btn {
+            opacity: 0.2;
+            transform: translateY(16px);
+            pointer-events: none;
+            transition: opacity 0.45s ease, transform 0.45s ease;
+        }
+        #cta-btn.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        #cta-btn:focus-visible,
+        #whatsapp-link:focus-visible,
+        #close-modal:focus-visible {
+            outline: 2px solid #007AFF;
+            outline-offset: 2px;
+        }
+        #success-modal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        #success-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-panel {
+            transform: translateY(10px) scale(0.98);
+            transition: transform 0.25s ease;
+        }
+        #success-modal.open .modal-panel {
+            transform: translateY(0) scale(1);
         }
         .pulse {
             animation: pulse 2s infinite;
@@ -74,9 +136,25 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        @media (prefers-reduced-motion: reduce) {
+            html, body {
+                scroll-behavior: auto;
+            }
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+            .section {
+                opacity: 1;
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <div id="scroll-progress" aria-hidden="true">
+        <div id="scroll-progress-bar"></div>
+    </div>
 
     <!-- Hero Section -->
     <section class="section visible bg-[#fbfbfd]">
@@ -235,7 +313,7 @@
                 </div>
             </div>
 
-            <button id="cta-btn" class="w-full mt-12 bg-black text-white py-5 rounded-2xl font-semibold text-lg pulse shadow-xl active:scale-95 transition-transform">
+            <button id="cta-btn" aria-label="Open confirmation options" class="w-full mt-12 bg-black text-white py-5 rounded-2xl font-semibold text-lg pulse shadow-xl active:scale-95">
                 Say Yes to Round 2?
             </button>
         </div>
@@ -248,18 +326,18 @@
         </p>
     </footer>
 
-    <div id="success-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-6 z-50">
-        <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
+    <div id="success-modal" class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-6 z-50" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-panel bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl">
             <div class="text-5xl mb-4">✨</div>
-            <h3 class="text-2xl font-bold mb-2 text-zinc-900">Excellent Choice.</h3>
+            <h3 id="modal-title" class="text-2xl font-bold mb-2 text-zinc-900">Excellent Choice.</h3>
             <p class="opacity-70 mb-8 text-zinc-600">Pascal is already scouting the chocolate. Please confirm the reservation below!</p>
             
             <div class="space-y-3">
-                <a id="whatsapp-link" href="https://wa.me/41799644960" target="_blank" class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-4 rounded-xl font-semibold shadow-lg hover:brightness-110 transition-all">
+                <a id="whatsapp-link" href="https://wa.me/41799644960" target="_blank" aria-label="Open WhatsApp chat with Pascal" class="flex items-center justify-center gap-2 w-full bg-[#25D366] text-white py-4 rounded-xl font-semibold shadow-lg hover:brightness-110 transition-all">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.591-3.849-1.591-5.946 0-6.556 5.332-11.891 11.893-11.891 3.181 0 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.481 8.403 0 6.556-5.332 11.893-11.893 11.893-1.996 0-3.957-.502-5.691-1.448l-6.392 1.664zm6.3-4.064c1.551.921 3.289 1.408 5.053 1.408 5.454 0 9.893-4.438 9.893-9.891 0-2.641-1.027-5.124-2.892-6.992-1.866-1.867-4.347-2.894-6.991-2.894-5.454 0-9.893 4.438-9.893 9.891 0 2.093.653 4.135 1.889 5.848l-.993 3.626 3.71-.967zM17.472 14.382c-.301-.15-1.781-.879-2.056-.979-.275-.101-.475-.149-.675.15-.199.299-.775.979-.95 1.174-.175.195-.351.219-.652.069-.302-.15-1.274-.469-2.426-1.496-.897-.8-1.502-1.788-1.677-2.088-.175-.299-.018-.462.13-.61.135-.133.301-.35.452-.524.151-.174.201-.299.301-.498.1-.2.05-.375-.025-.524-.075-.15-.675-1.625-.925-2.224-.244-.583-.493-.503-.675-.512-.175-.01-.375-.01-.575-.01s-.525.076-.8.375c-.275.299-1.05 1.024-1.05 2.498 0 1.475 1.075 2.897 1.225 3.097.15.2 2.116 3.23 5.125 4.532.715.31 1.273.494 1.708.633.719.227 1.373.195 1.89.117.577-.088 1.781-.728 2.031-1.429.25-.7.25-1.3.175-1.428-.076-.125-.276-.199-.577-.349z"/></svg>
                     Confirm via WhatsApp
                 </a>
-                <button onclick="document.getElementById('success-modal').style.display='none'" class="w-full py-3 text-sm text-zinc-400 hover:text-zinc-600 transition-colors">
+                <button id="close-modal" class="w-full py-3 text-sm text-zinc-400 hover:text-zinc-600 transition-colors">
                     Maybe later
                 </button>
             </div>
@@ -290,9 +368,47 @@
             observer.observe(section);
         });
 
-        // CTA Handler
-        document.getElementById('cta-btn').addEventListener('click', function() {
-            document.getElementById('success-modal').style.display = 'flex';
+        // Scroll progress + CTA reveal timing
+        const progressBar = document.getElementById('scroll-progress-bar');
+        const ctaBtn = document.getElementById('cta-btn');
+
+        function updateScrollUX() {
+            const maxScrollable = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = maxScrollable > 0 ? (window.scrollY / maxScrollable) * 100 : 0;
+            progressBar.style.width = `${Math.min(progress, 100)}%`;
+
+            if (progress >= 80) {
+                ctaBtn.classList.add('revealed');
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollUX, { passive: true });
+        window.addEventListener('resize', updateScrollUX);
+        updateScrollUX();
+
+        // Accessible modal handling
+        const modal = document.getElementById('success-modal');
+        const closeModalBtn = document.getElementById('close-modal');
+
+        function openModal() {
+            modal.classList.add('open');
+        }
+
+        function closeModal() {
+            modal.classList.remove('open');
+        }
+
+        ctaBtn.addEventListener('click', openModal);
+        closeModalBtn.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('open')) {
+                closeModal();
+            }
         });
     </script>
 </body>
